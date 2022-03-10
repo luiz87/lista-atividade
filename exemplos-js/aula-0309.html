@@ -37,23 +37,31 @@
         var r = somar(3, 2);
         document.write(`Resultado da funtion somar = ${r}`);
         function somar(n1, n2) {
+            mudarSinal("+");
             return n1 + n2;
         }
         function subtrair(n1, n2) {
+            mudarSinal("-");
             return n1 - n2;
         }
         function multiplicar(n1, n2) {
+            mudarSinal("*");
             return n1 * n2;
         }
         function dividir(n1, n2) {
+            mudarSinal("/");
             return n1 / n2;
+        }
+        function mudarSinal(operacao){
+            document.getElementById("sinal").innerHTML = operacao;
         }
 
         function executarOperacao(funcao) {
             document.getElementById('rs').value = "";
+            mudarSinal("");
             let n1 = Number(document.getElementById('n1').value);
             let n2 = Number(document.getElementById('n2').value);
-            let rs = funcao(n1, n2);
+            
             let campoVazio = "";
             if (n1 == 0) {
                 campoVazio = 'n1';
@@ -64,6 +72,7 @@
             }
 
             if(campoVazio == ""){
+                let rs = funcao(n1, n2);
                 document.getElementById('rs').value = rs;
             }else{
                 alert(`Você tem que preencher ${campoVazio}`)
@@ -72,7 +81,7 @@
 
     </script>
     <br>
-    <input type="number" id="n1">
+    <input type="number" id="n1"><span id="sinal"></span>
     <input type="number" id="n2">=
     <input type="number" id="rs" disabled>
     <br>
