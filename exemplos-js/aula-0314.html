@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    input {
+        display: block;
+    }
+
+    h1 {
+        font-size: 16px;
+        margin-bottom: 0px;
+        margin-bottom: 6px;
+    }
+
+    span {
+        font-size: 13px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: darkblue;
+    }
+
+    p {
+        margin: 0px;
+    }
+
+    body {
+        width: 60%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .questao {
+        background-color: #e0f7faa1;
+        padding: 1px 0px 10px 10px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+
+    }
+
+    .questao:hover {
+        background-color: #e0f7fa;
+    }
+
+    input[type=button] {
+        margin-top: 10px;
+    }
+</style>
+
+<body>
+    <div id="corpo">
+        <div class="questao">
+            <h1>Questã 01:<span>Calcular a média ponderada de 3 notas
+                    <a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1006"
+                        target="_blank">detalhar</a></span></h1>
+            <p id="resultado01">Resultado: A média das 3 notas foi xx.</p>
+            <label for="">Nota 01:</label>
+            <input type="text" id="nota01">
+            <label for="">Nota 02:</label>
+            <input type="text" id="nota02">
+            <label for="">Nota 03:</label>
+            <input type="text" id="nota03">
+            <input type="button" onclick="exeQuestao01()" value="Calcular">
+        </div>
+        <script>
+            function exeQuestao01() {
+                let nota01 = document.getElementById("nota01").value;
+                let nota02 = document.getElementById("nota02").value;
+                let nota03 = document.getElementById("nota03").value;
+
+                let resultado = ((nota01 * 2) + (nota02 * 3) + (nota03 * 5)) / 10;
+
+                document.getElementById("resultado01").innerHTML = `Resultado: A média das 3 notas foi ${resultado}.`;
+            }
+        </script>
+
+        <div class="questao">
+            <h1>Questã 02:<span> Senha Fixa <a href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1114"
+                        target="_blank">detalhar</a></span></h1>
+            <p id="resultado02">Resultado: xxxxx</p>
+            <label for="">Digite a senha:</label>
+            <input type="password" id="senha">
+            <input type="button" onclick="exeQuestao02()" value="Calcular">
+        </div>
+        <script>
+            function exeQuestao02() {
+                let senha = document.getElementById("senha").value;
+                let resultado = "Senha Invalida";
+                if (senha == '2002') {
+                    resultado = "Acesso Permitido";
+                }
+                document.getElementById("resultado02").innerHTML = `Resultado: ${resultado}!`;
+            }
+        </script>
+
+
+        <div class="questao">
+            <h1>Questã 03:<span> Intervalo [0,25], [25,50], [50,75], [75,100] <a
+                        href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1037"
+                        target="_blank">detalhar</a></span></h1>
+            <p id="resultado03">Resultado: O valor digita esta no intervalo [xx,xx].</p>
+            <label for="">Valor:</label>
+            <input type="text" id="numIntervalo">
+            <input type="button" onclick="exeQuestao03()" value="Calcular">
+        </div>
+        <script>
+            function exeQuestao03() {
+                let numIntervalo = document.getElementById("numIntervalo").value;
+                let resultado = "";
+                if (numIntervalo >= 0 && numIntervalo <= 25) {
+                    resultado = "[0,25]";
+                } else if (numIntervalo > 25 && numIntervalo <= 50) {
+                    resultado = "[25,50]";
+                } else if (numIntervalo > 50 && numIntervalo <= 75) {
+                    resultado = "[50,75]";
+                } else if (numIntervalo > 75 && numIntervalo <= 100) {
+                    resultado = "[75,100]";
+                } else {
+                    resultado = "Fora de intervalo";
+                }
+                document.getElementById("resultado03").innerHTML = `Resultado: O valor digita esta no intervalo ${resultado}!`;
+            }
+        </script>
+
+        <div class="questao">
+            <h1>Questã 04:<span> Aumento de Salário <a
+                        href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1048"
+                        target="_blank">detalhar</a></span></h1>
+            <p id="resultado04">Resultado: Novo salario: xx.xx, Ganho: xx.xx, Percentual: xx%</p>
+            <label for="">Salário atual:</label>
+            <input type="text" id="salario">
+            <input type="button" onclick="exeQuestao04()" value="Calcular">
+        </div>
+        <script>
+            function exeQuestao04(){
+                let salario = document.getElementById("salario").value;
+                let novoSalario = 0;
+                let ganho = 0;
+                let percentual = 0;
+                if(salario >= 0 && salario <= 400){
+                    percentual = 15;
+                    ganho = salario * 0.15;
+                    novoSalario = +salario + ganho;
+                }
+                if(salario > 400 && salario <= 800){
+                    percentual = 12;
+                    ganho = salario * 0.12;
+                    novoSalario = +salario + ganho;
+                }
+                if(salario > 800 && salario <= 1200){
+                    percentual = 10;
+                    ganho = salario * 0.10;
+                    novoSalario = +salario + ganho;
+                }
+                if(salario > 1200 && salario <= 2000){
+                    percentual = 7;
+                    ganho = salario * 0.07;
+                    novoSalario = +salario + ganho;
+                }
+                if(salario > 2000){
+                    percentual = 4;
+                    ganho = salario * 0.04;
+                    novoSalario = +salario + ganho;
+                }
+
+                document.getElementById("resultado04").innerHTML = `Resultado: Novo salario: ${novoSalario}, Ganho: ${ganho}, Percentual: ${percentual}%!`;
+            }
+        </script>
+
+        <div class="questao">
+            <h1>Questã 05:<span> Imposto de Renda <a
+                        href="https://www.urionlinejudge.com.br/judge/pt/problems/view/1051"
+                        target="_blank">detalhar</a></span></h1>
+            <p id="resultado05">Resultado:Imposto xxxxx</p>
+            <label for="">Renda:</label>
+            <input type="text" id="renda">
+            <input type="button" onclick="exeQuestao05()" value="Calcular">
+        </div>
+        <script>
+            function exeQuestao05(){
+                let renda = document.getElementById("renda").value;
+                let imposto = 0;
+                let resultado = "";
+                if(renda <= 2000){
+                    resultado = "Isento";
+                }
+                if(renda > 2000 && renda <= 3000){
+                    imposto = renda - 2000;
+                    imposto = imposto * 0.08;
+                    resultado = `R$ ${imposto}`;
+                }
+                if(renda > 3000 && renda <= 4500){
+                    imposto = renda - 3000;
+                    imposto = (imposto * 0.18) + 80;
+                    resultado = `R$ ${imposto}`;
+                }
+                if(renda > 4500){
+                    imposto = renda - 4500;
+                    imposto = (imposto * 0.28) + 350;
+                    resultado = `R$ ${imposto}`;
+                }
+                document.getElementById("resultado05").innerHTML = `Resultado: ${resultado}!`;
+            }
+        </script>
+
+        <div class="questao">
+            <h1>Questã 06:<span> Calcular o salário de um funcionário <a
+                        href="https://www.urionlinejudge.com.br/repository/UOJ_1008.html"
+                        target="_blank">detalhar</a></span></h1>
+            <p id="resultado06">Resultado: O funcionario xxxxxx vai receber xxx.</p>
+            <label for="">Nome Funcionário</label>
+            <input type="text" id="nome">
+            <label for="">Valor Hora</label>
+            <input type="text" id="valorHoras">
+            <label for="">Total de Horas Trabalhadas</label>
+            <input type="text" id="horas">
+            <input type="button" onclick="exeQuestao06()" value="Calcular">
+        </div>
+
+        <script>
+            function exeQuestao06(){
+                let horas = document.getElementById("horas").value;
+                let valorHoras = document.getElementById("valorHoras").value;
+                let nome = document.getElementById("nome").value;
+                let resultado = valorHoras * horas;                
+                document.getElementById("resultado06").innerHTML = `Resultado: O funcionario ${nome} vai receber ${resultado}.`;
+            }
+        </script>
+
+        <div class="questao">
+            <h1>Questã 07:<span> Calcular o consumo médio de um automóvel <a
+                        href="https://www.urionlinejudge.com.br/repository/UOJ_1014.html"
+                        target="_blank">detalhar</a></span></h1>
+            <p id="resultado07">Resultado: O automóvel fez o consumo médio de xxx.</p>
+            <label for="">Distância percorrida</label>
+            <input type="text" id="distancia">
+            <label for="">Combustível gasto</label>
+            <input type="text" id="combustivel">
+            <input type="button" onclick="exeQuestao07()" value="Calcular">
+        </div>
+        <script>
+            function exeQuestao07(){
+                let distancia = document.getElementById("distancia").value;
+                let combustivel = document.getElementById("combustivel").value;
+                let resultado = distancia/combustivel;                
+                document.getElementById("resultado07").innerHTML = `Resultado: O automóvel fez o consumo médio de ${resultado}.`;
+            }
+        </script>
+    </div>
+</body>
+
+</html>
