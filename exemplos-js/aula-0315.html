@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo Objeto JS</title>
+</head>
+
+<body>
+    <script>
+        let car = {
+            name: "Fiat",
+            model: "Palio",
+            weight: "1000kg",
+            color: "red",
+            km: 80,
+            move: function (addKm) {
+                this.km += addKm
+            },
+            status: function () {
+                return `<br>Dados do Carro 
+                        <br>Marca: ${this.name}
+                        <br>Modelo: ${this.model}
+                        <br>Peso: ${this.weight}
+                        <br>Cor: ${this.color}
+                        <br>KM: ${this.km}
+                        `;
+            }
+        }
+        document.write(JSON.stringify(car));
+        document.write(car.status());
+        car.color = "blue";
+        car["move"](100); // mesca coisa que = car.move(100);
+        document.write(car.status());
+    </script>
+    <br>
+    Lista de carros em um Array...
+    <br>
+    <script>
+        let lsCar = ["Fait", "Ferrari", "Lamborgini", "Alfa Romeu"];
+        document.write(lsCar);
+        let i = 1;
+        document.write(`<br>O carro que está no indice ${i} = ${lsCar[i]}`);
+        document.write(`<br>Modificar o carro do indice ${i} para BMW.`);
+        lsCar[i] = "BMW";
+        document.write(`<br>O carro que está no indice ${i} = ${lsCar[i]}`);
+        document.write('<br>' + lsCar);
+        document.write(`<br>A lista de carro tem um total de ${lsCar.length}`);
+        document.write(`<br>O primeiro carro é ${lsCar[0]}`);
+        document.write(`<br>O último carro é ${lsCar[lsCar.length - 1]}`);
+
+        let texto = "<ul>";
+        // parametro 01, variavel indice
+        // parametro 02, condição para o código ser repedido
+        // parametro 03, forma de indice andar
+        lsCar.push("Buggati");
+        lsCar.push("Porshe");
+        for (let j = 0; j < lsCar.length; j++) {
+            document.write(j);
+            document.write(lsCar[j]);
+            texto += `<li>[${j}] ${lsCar[j]}</li>`;
+        }
+        texto += '</ul>';
+        document.write(texto)
+    </script>
+</body>
+
+</html>
