@@ -16,7 +16,7 @@
     <button onclick="limpar()">Limpar</button>
     <br>
     <button onclick="mostrarMsg3()">Exemplo Mostrar Msg 3x</button>
-    <button onclick="mostrarMsgX()">Exemplo Mostrar Msg X vezes</button>    
+    <button onclick="mostrarMsgX()">Exemplo Mostrar Msg X vezes</button>
     <br>
     <button onclick="removerUltimoAluno()">Remover Ultimo Aluno</button>
     <button onclick="incluirAluno()">Incluir Aluno</button>
@@ -24,24 +24,35 @@
     <div id="demo"></div>
     <script>
         // desafiooooo 
-        // incluir no nome da pessoa que vai ser removida...
+        // incluir o nome da pessoa que vai ser removida...
         // não permitir que seja incluido um novo aluno sem caractere
         let alunos = ["Alexandre Leastro Lemes Gonzaga", "André Albuquerque Gonçalves", "Aryna Noêmia Meireles de Sousa", "Beatriz Helena Ulian Coêlho", "Danielson Maciel da Costa", "Danilo de Souza Bezerra", "Dayana da Silva Correia", "Diogo Henrique Vieira Leite5 de mar.", "Edvando Junyor Sales de Oliveira", "FABRICIO ARAUJO DA SILVA", "Felipe Silva de Araujo", "Germanir Leal Santos", "Jorgean do Bomfim Paulino", "José Pereira Caetano", "Kacio de Sousa Meneses", "Leandro Almeida da Silva", "Lucas Antônio Cordeiro de Souza Melchior", "Lucas Luan Santos Araujo", "Lucas Silva Piedade", "Marcio Aquilles Monteles Silva", "Marcus Vinicius Freita Silva", "Matheus Felício Lima", "Rafaella Beatriz Guimarães Cardoso", "Rodolfo Rodrigues Francisco", "Suyanne Sara Miranda Silva", "Thamires de Jesus dos Santos", "Vanessa Gonçalves de Moura", "Wellington Oliveira Machado", "Wendell Baresi Santos de Oliveira"];
         function incluirAluno() {
             let novoAluno = prompt("Digite o nome do novo aluno");
-            alunos.push(novoAluno);
-            lacoFor();
+            // alert(novoAluno.length);
+            // if (novoAluno == null) return;
+            if (novoAluno.length < 3) {
+                alert("Necessário preencher com algum caractere.");
+                incluirAluno();
+                return false;
+            } else {
+                alunos.push(novoAluno);
+                lacoFor();
+            }
+
         }
 
-        function removerPrimeiroAluno(){
-            if(confirm("Realmente deseja apagar o primeiro aluno?")){
+        function removerPrimeiroAluno() {
+            let aluno = alunos[0];
+            if (confirm(`Realmente deseja apagar ${aluno} da lista?`)) {
                 alunos.shift();
                 lacoFor();
             }
         }
 
         function removerUltimoAluno() {
-            let confirmacao = confirm("Realmente deseja apagar o último aluno?");
+            let aluno = alunos[alunos.length - 1];
+            let confirmacao = confirm(`Realmente deseja apagar ${aluno} da lista?`);
             if (confirmacao) {
                 alunos.pop();
                 lacoFor();

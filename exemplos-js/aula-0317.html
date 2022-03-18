@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula do dia 17.</title>
+</head>
+
+<body>
+    <button onclick="sortear()">Sorteio</button>
+    <div id="saida"></div>
+    <script>
+        let alunos = ["ALEXANDRE LEASTRO LEMES GONZAGA", "ANA JULIA DA SILVA FELICIANO", "ANDERSON GABRYEL FREIRE BARBOSA","ANDRÉ ALBUQUERQUE GONÇALVES","ANGELO DE SOUZA MOREIRA","ARYNA NOÊMIA MEIRELES DE SOUSA","BEATRIZ HELENA ULIAN COÊLHO","CAMILA DANTAS DE MELO","DANIELSON MACIEL DA COSTA","DANILO DE SOUZA BEZERRA","DAYANA DA SILVA CORREIA","DIOGO HENRIQUE VIEIRA LEITE","EDVANDO JUNYOR SALES DE OLIVEIRA","FABRICIO ARAUJO DA SILVA","FELIPE SILVA DE ARAUJO","FREDERICO LUIZ COSTA DE FARIA","GERMANIR LEAL SANTOS","JORGEAN DO BOMFIM PAULINO","JOSÉ PEREIRA CAETANO","KACIO DE SOUSA MENESES","LEANDRO ALMEIDA DA SILVA","LUCAS LUAN SANTOS ARAUJO","LUCAS PEREIRA SALMITO","LUCAS SILVA PIEDADE","MARCIO AQUILLES MONTELES SILVA","MARCUS VINICIUS FREITA SILVA","MATHEUS FELÍCIO LIMA","PAULO DA SILVA BARBOSA","RAFAELLA BEATRIZ GUIMARÃES CARDOSO","RODOLFO RODRIGUES FRANCISCO","SAMUEL RAMOS QUITÂNIA","SUYANNE SARA MIRANDA SILVA","SUZANNY FREITA SILVA","THAMIRES DE JESUS DOS SANTOS","VANESSA GONÇALVES DE MOURA","WELLINGTON OLIVEIRA MACHADO","WENDELL BARESI SANTOS DE OLIVEIRA"];
+        let i = 1;
+        function sortear() {
+            if (alunos.length == 0) {
+                alert("Todos os alunos já foram sorteados.");
+                return;
+            }
+            let saida = (Math.random() * alunos.length);
+            let sorteado = Math.trunc(saida);
+            let p = document.createElement("p");
+            p.innerHTML = `${i++} - ${alunos[sorteado]}`;
+            document.getElementById("saida").append(p);
+            alunos.splice(sorteado, 1);
+        }
+    </script>
+</body>
+
+</html>

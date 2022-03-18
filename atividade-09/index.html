@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exercício 12</title>
+</head>
+<style>
+    input[type='text'],
+    select {
+        display: block;
+    }
+
+    h1 {
+        font-size: 16px;
+        margin-bottom: 0px;
+        margin-bottom: 6px;
+    }
+
+    span {
+        font-size: 13px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: darkblue;
+    }
+
+    p {
+        margin: 0px;
+    }
+
+    body {
+        width: 80%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .questao {
+        background-color: #e0f7faa1;
+        padding: 1px 0px 10px 10px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+    }
+
+    .questao:hover {
+        background-color: #e0f7fa;
+    }
+
+    input[type='button'] {
+        margin-top: 10px;
+    }
+
+    .mao {
+        font-size: 30px;
+        margin: 10px;
+        cursor: pointer;
+    }
+
+    .adversario {
+        font-size: 50px;
+
+    }
+</style>
+
+<body>
+    <div id="corpo">
+        <div class="questao">
+            <h1>
+                Questã 01:<span>Tabuada
+                    <a href="detalhes.html" target="_blank">detalhar</a></span>
+            </h1>
+            <input type="text" id="" style="display: inline" />
+            <input type="button" value="Calcular" />
+            <p id="">Resultado: <br>N x 1 = NX<br>N x 2 = NX<br>...<br>N x 10 = NX<br></p>
+        </div>
+        <div class="questao">
+            <h1>
+                Questã 02:<span>Mostrar os números entre 2 valores
+                    <a href="detalhes.html" target="_blank">detalhar</a></span>
+            </h1>
+            <p id="">Resultado: Os número entre A e Z são (x,x,x,x,x).</p>
+            <label for="">Valor 01:</label>
+            <input type="text" id="" />
+            <label for="">Valor 02:</label>
+            <input type="text" id="" />
+            <input type="button" value="Executar" />
+        </div>
+        <div class="questao">
+            <h1>
+                Questã 03:<span>
+                    Lista armazenada
+                    <a href="detalhes.html" target="_blank">detalhar</a></span>
+            </h1>
+            <p id="">Resultado: A lista de itens é [xxxx,xxxx,xxxx,xxxxx]</p>
+            <label for="">Item:</label>
+            <input type="text" id="" />
+            <input type="button" value="Add" />
+            <input type="button" value="Show" />
+            <input type="button" value="Clear" />
+        </div>
+        <div class="questao">
+            <h1>
+                Questã 04:<span>Mega SENA
+                    <a href="detalhes.html" target="_blank">detalhar</a></span>
+            </h1>
+            <p id="">Resultado:00,00,00,00,00,00</p>
+            <input type="button" value="Sortear!" />
+        </div>
+        <div class="questao">
+            <h1>
+                Questã 05:<span>
+                    Lista homens e mulheres
+                    <a href="detalhes.html" target="_blank">detalhar</a></span>
+            </h1>
+            <p id="">
+                Resultado: <br />Lista de homens [xxxx,xxxx,xxxx,xxxxx] <br />Lista de
+                mulheres [xxxx,xxxx,xxxx,xxxxx]
+            </p>
+            <label for="">Nome:</label>
+            <input type="text" id="" />
+            <label for="">Sexo:</label>
+            <select name="sexo" id="">
+                <option value="M">Masculino</option>
+                <option value="F">Feminino</option>
+            </select>
+            <input type="button" value="Add" />
+            <input type="button" value="Show" />
+            <input type="button" value="Clear" />
+        </div>
+        <div class="questao">
+            <h1>
+                DESAFIOO!:<span>
+                    Jo-Ken-Po <a href="detalhes.html" target="_blank">detalhar</a></span>
+            </h1>
+            <p id="">Resultado: [Vitótio|Derrota|Empate]</p>
+            <span onmouseover="this.style.fontSize = '50px'" onmouseout="this.style.fontSize = '30px'"
+                class="mao">✊🏽</span>
+            <span onmouseover="this.style.fontSize = '50px'" onmouseout="this.style.fontSize = '30px'"
+                class="mao">🖐🏽</span>
+            <span onmouseover="this.style.fontSize = '50px'" onmouseout="this.style.fontSize = '30px'"
+                class="mao">✌🏽</span>
+            #
+            <span class="adversario">👋🏽</span>
+        </div>
+    </div>
+</body>
+
+</html>
