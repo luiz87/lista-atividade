@@ -11,7 +11,9 @@
 <body>
 
     <button onclick="gerarCpf()">Gerar CPF</button>
-    <button onclick="alert(validarCpf(prompt('Digite um cpf!')))" >Validar CPF</button>
+    <button onclick="alert(validarCpf(prompt('Digite um cpf!')))">Validar CPF</button>
+    <br><a href="https://campuscode.com.br/conteudos/o-calculo-do-digito-verificador-do-cpf-e-do-cnpj">
+        regra de como é feito o calculo</a>
     <script>
         // laço de repetição do 10 até 2
         // while
@@ -27,7 +29,7 @@
             dig = calcDigito(1, cpf);
             cpf[10] = dig;
             console.log(cpf);
-            alert(cpf.toString().replaceAll(',',''))
+            alert(cpf.toString().replaceAll(',', ''))
         }
 
 
