@@ -9,7 +9,7 @@
 </head>
 
 <body>
-
+    <div id="cpf"></div>
     <button onclick="gerarCpf()">Gerar CPF</button>
     <button onclick="alert(validarCpf(prompt('Digite um cpf!')))">Validar CPF</button>
     <br><a href="https://campuscode.com.br/conteudos/o-calculo-do-digito-verificador-do-cpf-e-do-cnpj">
@@ -30,7 +30,11 @@
             dig = calcDigito(1, cpf);
             cpf[10] = dig;
             console.log(cpf);
-            alert(cpf.toString().replaceAll(',', ''))
+            cpf = cpf.toString().replaceAll(',', '');
+            // cpf = "11122233344"; //"111.222.333-44";
+                // 01234567891
+            cpf = `${cpf.substr(0,3)}.${cpf.substr(3,3)}.${cpf.substr(6,3)}-${cpf.substr(9,3)}`;
+            document.getElementById("cpf").innerHTML = cpf;
         }
 
 
@@ -38,6 +42,7 @@
         // alert(validarCpf(prompt("Digite um cpf!")));
         // desafio validar CPF formatado
         function validarCpf(txtCpf) {
+            txtCpf = txtCpf.replaceAll(".","").replaceAll("-","");
             let cpf = txtCpf.split("");
             let dig1 = calcDigito(0, cpf);
             let dig2 = calcDigito(1, cpf);

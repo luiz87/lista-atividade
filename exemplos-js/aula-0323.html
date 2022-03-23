@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Aula dia 22</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Aula dia 22/03/2022</h2>
+        <p>Exemplo de paginação</p>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nome Aluno</th>
+                </tr>
+            </thead>
+            <tbody id="tbCorpo">
+
+            </tbody>
+        </table>
+        <ul class="pagination">
+        </ul>
+    </div>
+    <script>
+        let alunos = ["ALEXANDRE LEASTRO LEMES GONZAGA", "ANA JULIA DA SILVA FELICIANO", "ANDERSON GABRYEL FREIRE BARBOSA", "ANDRÉ ALBUQUERQUE GONÇALVES", "ANGELO DE SOUZA MOREIRA", "ARYNA NOÊMIA MEIRELES DE SOUSA", "BEATRIZ HELENA ULIAN COÊLHO", "CAMILA DANTAS DE MELO", "DANIELSON MACIEL DA COSTA", "DANILO DE SOUZA BEZERRA", "DAYANA DA SILVA CORREIA", "DIOGO HENRIQUE VIEIRA LEITE", "EDVANDO JUNYOR SALES DE OLIVEIRA", "FABRICIO ARAUJO DA SILVA", "FELIPE SILVA DE ARAUJO", "FREDERICO LUIZ COSTA DE FARIA", "GERMANIR LEAL SANTOS", "JORGEAN DO BOMFIM PAULINO", "JOSÉ PEREIRA CAETANO", "KACIO DE SOUSA MENESES", "LEANDRO ALMEIDA DA SILVA", "LUCAS LUAN SANTOS ARAUJO", "LUCAS PEREIRA SALMITO", "LUCAS SILVA PIEDADE", "MARCIO AQUILLES MONTELES SILVA", "MARCUS VINICIUS FREITA SILVA", "MATHEUS FELÍCIO LIMA", "PAULO DA SILVA BARBOSA", "RAFAELLA BEATRIZ GUIMARÃES CARDOSO", "RODOLFO RODRIGUES FRANCISCO", "SAMUEL RAMOS QUITÂNIA", "SUYANNE SARA MIRANDA SILVA", "SUZANNY FREITA SILVA", "THAMIRES DE JESUS DOS SANTOS", "VANESSA GONÇALVES DE MOURA", "WELLINGTON OLIVEIRA MACHADO", "WENDELL BARESI SANTOS DE OLIVEIRA"];
+        let qtPagina = Math.ceil(alunos.length / 5);
+        let pg = 0;
+
+        function carregaPg(n) {
+            if(n<0 || n>qtPagina -1) return null;
+            pg = n;
+            let txtTabela = "";
+            let i = n * 5;
+            let f = i + 4;
+            while (i <= f) {
+                let aluno = (i >= alunos.length) ? "&nbsp;" : alunos[i];
+                txtTabela += `<tr><td>${aluno}</td></tr>`;
+                i++;
+            }
+            document.getElementById("tbCorpo").innerHTML = txtTabela;
+            let tagLi = document.getElementsByTagName("li");
+            for (let p = 0; p < tagLi.length; p++) {
+                tagLi[p].classList.remove("active");    
+            }
+            tagLi[pg+2].classList.add("active");
+        }
+        
+        let listaPagina = "";
+        i = 1;
+        while (i <= qtPagina) {
+            listaPagina += `<li><a href="#" onclick="carregaPg(${i - 1})">${i}</a></li>`;
+            i++;
+        }
+        listaPagina =
+            `<li><a href="#" onclick="carregaPg(0)"><<</a></li>
+        <li><a href="#" onclick="carregaPg(pg-1)"><</a></li>
+        ${listaPagina}
+        <li><a href="#" onclick="carregaPg(pg+1)">></a></li>
+        <li><a href="#" onclick="carregaPg(${qtPagina-1})">>></a></li>`;
+        document.getElementsByClassName("pagination")[0].innerHTML = listaPagina;
+        carregaPg(0);
+        // desafio ...
+        // fazer funcionar os botões de proximo e anterior...
+        // sugestão, fazer uma variável global ..
+
+    </script>
+</body>
+
+</html>
