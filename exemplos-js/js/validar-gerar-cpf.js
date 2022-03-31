@@ -21,6 +21,7 @@ function gerarCpf() {
 // alert(validarCpf(prompt("Digite um cpf!")));
 // desafio validar CPF formatado
 function validarCpf(txtCpf) {
+    // console.log(txtCpf);
     txtCpf = txtCpf.replaceAll(".","").replaceAll("-","");
     let cpf = txtCpf.split("");
     let dig1 = calcDigito(0, cpf);
