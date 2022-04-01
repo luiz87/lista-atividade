@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="js/validar-gerar-cpf.js"></script>
+    <title>Aula dia 31</title>
+    <style>
+        .estilo-mouse {
+            cursor: pointer;
+            text-align: center;
+        }
+        .estilo-mouse:hover {
+            background-color: cadetblue;
+            color: aliceblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Aula dia 31/03/2022</h2>
+        <p>Exemplo dos botões para movimentar os alunos, e alerta.</p>
+        <div class="alert alert-success" id="msg-alerta" style="display: none;">
+            <a href="#" onclick="ocultar()" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <samp id="msg"></samp>
+        </div>
+        <form class="form-horizontal" action="">
+            <input type="hidden" id="id">
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="nome">Nome:</label>
+                <div class="col-sm-6">
+                    <input type="nome" class="form-control" id="nome" placeholder="Enter nome" name="nome">
+                </div>
+                <label class="control-label col-sm-1" for="cpf">Cpf:</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" id="cpf" placeholder="000.000.000-00" name="cpf">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="dt-nascimento">Data de Nascimento:</label>
+                <div class="col-sm-4">
+                    <input type="date" class="form-control" id="dt-nascimento" placeholder="Enter password"
+                        name="dt-nascimento">
+                </div>
+                <label class="control-label col-sm-2" for="idade">Idade:</label>
+                <div class="col-sm-4">
+                    <input type="text" disabled class="form-control" id="idade" placeholder="" name="idade">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-8 col-sm-4">
+                    <button type="button" onclick="novo()" class="btn btn-success">Novo</button>
+                    <button type="button" onclick="gravar()" class="btn btn-primary">Gravar</button>
+                    <button type="button" id="btApagar" disabled onclick="apagar()"
+                        class="btn btn-danger">Apagar</button>
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Nome Aluno</th>
+                </tr>
+            </thead>
+            <tbody id="tbCorpo">
+
+            </tbody>
+        </table>
+        <ul class="pagination">
+        </ul>
+    </div>
+    <script>
+        // desafio, incluir o input do CPF
+        let alunos = [{ nome: "ALEXANDRE LEASTRO LEMES GONZAGA", dt_nascimento: "2000-03-29" }, { nome: "ANA JULIA DA SILVA FELICIANO", dt_nascimento: "1984-05-04" }, { nome: "ANDERSON GABRYEL FREIRE BARBOSA", dt_nascimento: "1973-11-16" }, { nome: "ANDRÉ ALBUQUERQUE GONÇALVES", dt_nascimento: "1978-06-08" }, { nome: "ANGELO DE SOUZA MOREIRA", dt_nascimento: "2005-11-30" }, { nome: "ARYNA NOÊMIA MEIRELES DE SOUSA", dt_nascimento: "1976-06-16" }, { nome: "BEATRIZ HELENA ULIAN COÊLHO", dt_nascimento: "1981-02-05" }, { nome: "CAMILA DANTAS DE MELO", dt_nascimento: "1999-04-18" }, { nome: "DANIELSON MACIEL DA COSTA", dt_nascimento: "2000-10-21" }, { nome: "DANILO DE SOUZA BEZERRA", dt_nascimento: "1987-11-29" }, { nome: "DAYANA DA SILVA CORREIA", dt_nascimento: "1973-06-16" }, { nome: "DIOGO HENRIQUE VIEIRA LEITE", dt_nascimento: "2016-08-29" }, { nome: "EDVANDO JUNYOR SALES DE OLIVEIRA", dt_nascimento: "1982-09-07" }, { nome: "FABRICIO ARAUJO DA SILVA", dt_nascimento: "1972-05-17" }, { nome: "FELIPE SILVA DE ARAUJO", dt_nascimento: "2017-09-15" }, { nome: "FREDERICO LUIZ COSTA DE FARIA", dt_nascimento: "2001-07-21" }, { nome: "GERMANIR LEAL SANTOS", dt_nascimento: "2019-01-15" }, { nome: "JORGEAN DO BOMFIM PAULINO", dt_nascimento: "2004-10-17" }, { nome: "JOSÉ PEREIRA CAETANO", dt_nascimento: "2006-04-04" }, { nome: "KACIO DE SOUSA MENESES", dt_nascimento: "1978-06-12" }, { nome: "LEANDRO ALMEIDA DA SILVA", dt_nascimento: "2003-07-27" }, { nome: "LUCAS LUAN SANTOS ARAUJO", dt_nascimento: "1981-05-05" }, { nome: "LUCAS PEREIRA SALMITO", dt_nascimento: "1975-02-07" }, { nome: "LUCAS SILVA PIEDADE", dt_nascimento: "2012-02-14" }, { nome: "MARCIO AQUILLES MONTELES SILVA", dt_nascimento: "1978-10-29" }, { nome: "MARCUS VINICIUS FREITA SILVA", dt_nascimento: "1980-01-28" }, { nome: "MATHEUS FELÍCIO LIMA", dt_nascimento: "1989-04-16" }, { nome: "PAULO DA SILVA BARBOSA", dt_nascimento: "1981-04-02" }, { nome: "RAFAELLA BEATRIZ GUIMARÃES CARDOS", dt_nascimento: "2016-05-07" }, { nome: "RODOLFO RODRIGUES FRANCISCO", dt_nascimento: "2009-06-17" }, { nome: "SAMUEL RAMOS QUITÂNIA", dt_nascimento: "1977-10-25" }, { nome: "SUYANNE SARA MIRANDA SILVA", dt_nascimento: "1977-08-30" }, { nome: "SUZANNY FREITA SILVA", dt_nascimento: "2004-01-23" }, { nome: "THAMIRES DE JESUS DOS SANTOS", dt_nascimento: "2005-09-12" }, { nome: "VANESSA GONÇALVES DE MOURA", dt_nascimento: "1983-10-03" }, { nome: "WELLINGTON OLIVEIRA MACHADO", dt_nascimento: "2002-07-17" }, { nome: "WENDELL BARESI SANTOS DE OLIVEIRA", dt_nascimento: "1986-07-13" }];
+        let qtPagina = Math.ceil(alunos.length / 5);
+        let pg = 0;
+
+        if (localStorage.getItem('alunos') == null) {
+            gerarListaCpf();
+        } else {
+            alunos = JSON.parse(localStorage.getItem('alunos'));
+        }
+
+        function apagar() {
+            let i = document.getElementById('id').value;
+            if (i == '') {
+                alert('Necessário selecionar um aluno.');
+            }
+            if (confirm("Realmente deseja apagar esse aluno?")) {
+                alunos.splice(i, 1);
+                alert('Aluno removido');
+                console.log(alunos);
+            }
+            localStorage.setItem('alunos', JSON.stringify(alunos));
+            carregaPg(0);
+            novo();
+            paginacao();
+        }
+
+        function ocultar() {
+            document.getElementById('msg-alerta').style.display = 'none';
+        }
+
+        function gerarListaCpf() {
+            for (const i in alunos) {
+                alunos[i].cpf = gerarCpf();
+                console.log(alunos[i]);
+                localStorage.setItem('alunos', JSON.stringify(alunos));
+            }
+        }
+
+        function carregaPg(n) {
+            if (n < 0 || n > qtPagina - 1) return null;
+            pg = n;
+            let txtTabela = "";
+            let i = n * 5;
+            let f = i + 4;
+            while (i <= f) {
+                let aluno = (i >= alunos.length) ? "&nbsp;" : alunos[i];
+                let nome = (aluno.nome == undefined) ? "&nbsp;" : aluno.nome;
+                let edit = (aluno.nome == undefined) ? "&nbsp;" : `<span class="glyphicon glyphicon-eye-open"></span>`;
+                let up = (aluno.nome == undefined) ? "&nbsp;" : `<span class="glyphicon glyphicon-arrow-up"></span>`;
+                let down = (aluno.nome == undefined) ? "&nbsp;" : `<span class="glyphicon glyphicon-arrow-down"></span>`;
+
+                txtTabela += `<tr>
+                        <td>${nome}</td>
+                        <td class='estilo-mouse' onclick='editar(${i})'>${edit}</td>
+                        <td class='estilo-mouse' onclick='mover(${i},-1)'>${up}</td>
+                        <td class='estilo-mouse' onclick='mover(${i}, 1)'>${down}</td>
+                    </tr>`;
+                i++;
+            }
+            document.getElementById("tbCorpo").innerHTML = txtTabela;
+            let tagLi = document.getElementsByTagName("li");
+            for (let p = 0; p < tagLi.length; p++) {
+                tagLi[p].classList.remove("active");
+            }
+            tagLi[pg + 2].classList.add("active");
+        }
+
+        function mover(i, m) {
+            // 3 variaveis pra fazer a troca de dos alunos
+            if (i + m < 0 || i + m > alunos.length - 1) return;
+            try {
+                let temp = alunos[i];
+                alunos[i] = alunos[i + m];
+                alunos[i + m] = temp;
+                carregaPg(pg);
+                localStorage.setItem('alunos', JSON.stringify(alunos));
+            } catch (error) {
+
+            }
+        }
+
+        function idade(dtNascimento) {
+            let dtAtual = new Date();
+            let anoAtual = dtAtual.getFullYear();
+            let anoNascimento = dtNascimento.substr(0, 4);
+            let idade = anoAtual - anoNascimento;
+            let mes = dtAtual.getMonth() + 1;
+            mes = mes.toString().padStart(2, 0);
+            let dia = dtAtual.getDate();
+            dia = dia.toString().padStart(2, 0);
+            idade += (`${mes}-${dia}` < `${dtNascimento.substr(5, 5)}`) ? -1 : 0;
+            return idade;
+        }
+
+        function editar(i) {
+            document.getElementById("nome").value = alunos[i].nome;
+            document.getElementById("dt-nascimento").value = alunos[i].dt_nascimento;
+            document.getElementById("id").value = i;
+            document.getElementById("idade").value = idade(alunos[i].dt_nascimento);
+            document.getElementById("cpf").value = alunos[i].cpf;
+            document.getElementById('btApagar').removeAttribute("disabled");
+        }
+
+        function gravar() {
+
+            let i = document.getElementById("id").value;
+            let aluno = {};
+            aluno.nome = document.getElementById("nome").value;
+            aluno.dt_nascimento = document.getElementById("dt-nascimento").value;
+            aluno.cpf = document.getElementById("cpf").value;
+
+            if (!validacoes(aluno)) return;
+
+            // condição que identifica que será gravado um novo aluno.
+            if (i == '') {
+                i = alunos.length;
+                alunos[i] = {};
+            }
+            alunos[i].nome = document.getElementById("nome").value;
+            alunos[i].dt_nascimento = document.getElementById("dt-nascimento").value;
+            alunos[i].cpf = document.getElementById("cpf").value;
+            localStorage.setItem('alunos', JSON.stringify(alunos));
+            carregaPg(pg);
+            novo();
+            paginacao();
+            let elemento = document.getElementById('msg-alerta');
+            elemento.classList.add("alert-success");
+            elemento.classList.remove("alert-danger");
+            elemento.style.display = '';
+            document.getElementById('msg').innerHTML = `<strong>Sucesso!</strong> Alteração gravada.`;
+        }
+
+        function validacoes(aluno) {
+            let retorno = true;
+            let msg = "";
+            if (aluno.nome.length <= 2) {
+                msg += "Nome inválido. ";
+                retorno = false;
+            }
+
+            if (!validarCpf(aluno.cpf)) {
+                msg += "CPF inválido. ";
+                retorno = false;
+            }
+
+            if (aluno.dt_nascimento == '' || idade(aluno.dt_nascimento) <= 5) {
+                msg += "Não pode ser matriculado por causa da idade. ";
+                retorno = false;
+            }
+
+            if (!retorno) {
+                let elemento = document.getElementById('msg-alerta');
+                elemento.classList.remove("alert-success");
+                elemento.classList.add("alert-danger");
+                elemento.style.display = '';
+                document.getElementById('msg').innerHTML = `<strong>Erro!</strong> ${msg}`;
+            }
+
+            console.log(JSON.stringify(aluno))
+            return retorno;
+        }
+
+        function novo() {
+            document.getElementById('msg-alerta').style.display = 'none';
+            document.getElementById("nome").value = '';
+            document.getElementById("dt-nascimento").value = '';
+            document.getElementById("id").value = '';
+            document.getElementById("idade").value = '';
+            document.getElementById("cpf").value = '';
+            document.getElementById('btApagar').setAttribute("disabled", "");
+        }
+
+        function paginacao() {
+            qtPagina = Math.ceil(alunos.length / 5);
+            let listaPagina = "";
+            i = 1;
+            while (i <= qtPagina) {
+                listaPagina += `<li><a href="#" onclick="carregaPg(${i - 1})">${i}</a></li>`;
+                i++;
+            }
+            listaPagina =
+                `<li><a href="#" onclick="carregaPg(0)"><<</a></li>
+                <li><a href="#" onclick="carregaPg(pg-1)"><</a></li>
+                ${listaPagina}
+                <li><a href="#" onclick="carregaPg(pg+1)">></a></li>
+                <li><a href="#" onclick="carregaPg(${qtPagina - 1})">>></a></li>`;
+            document.getElementsByClassName("pagination")[0].innerHTML = listaPagina;
+        }
+
+        paginacao();
+        carregaPg(0);
+
+    </script>
+</body>
+
+</html>
