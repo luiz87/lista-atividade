@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Aula dia 05.04</title>
+</head>
+
+<body>
+    <button onclick="exemploAjax()">Carregar as regiões!</button>
+    <script>
+        function exemploAjax() {
+            let xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "https://servicodados.ibge.gov.br/api/v1/localidades/regioes");
+            xhttp.onload = function () {
+                document.write(this.responseText);
+            }
+            xhttp.send();
+        }
+        // exemploAjax();
+        let endereco = { cep: '72.300-22', numero: '35' }
+        let pessoa = { nome: 'Luiz', idade: 34, telefone: [{ numero: '99883300' }] };
+        pessoa.endereco = endereco;
+
+    </script>
+
+    <script>
+        function carregarListaMunicipio(uf) {
+            let xhttp = new XMLHttpRequest();
+            xhttp.open("GET", `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios?orderBy=nome`);
+            xhttp.onload = function () {
+                let retorno = JSON.parse(this.responseText);
+                let option = "";
+                for (const i in retorno) {
+                    option += `<option value="${retorno[i].id}">${retorno[i].nome}</option>`;
+                }
+                document.getElementById("ls-municipio").innerHTML = option;
+            }
+            xhttp.send();
+        }
+
+        function carregarListaUf(regiao) {
+            let xhttp = new XMLHttpRequest();
+            let endereco = '';
+            if (regiao == '') {
+                endereco = `https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome`
+            } else {
+                endereco = `https://servicodados.ibge.gov.br/api/v1/localidades/regioes/${regiao}/estados?orderBy=nome`
+            }
+
+            // 
+            xhttp.open("GET", endereco);
+            xhttp.onload = function () {
+                let retorno = JSON.parse(this.responseText);
+                let option = "";
+                for (const i in retorno) {
+                    option += `<option value="${retorno[i].id}">${retorno[i].nome}</option>`;
+                }
+                document.getElementById("ls-uf").innerHTML = option;
+                carregarListaMunicipio(retorno[0].id);
+            }
+            xhttp.send();
+        }
+
+        function carregarListaRegiao() {
+            let xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "https://servicodados.ibge.gov.br/api/v1/localidades/regioes");
+            xhttp.onload = function () {
+                let retorno = JSON.parse(this.responseText);
+                let option = `<option value="">Selecione</option>`;
+                for (const i in retorno) {
+                    option += `<option value="${retorno[i].id}">${retorno[i].nome}</option>`;
+                }
+                document.getElementById("ls-regiao").innerHTML = option;
+            }
+            xhttp.send();
+        }
+        carregarListaRegiao();
+    </script>
+
+    <div class="container">
+        <div class="form-group col-sm-3">
+            <label for="ls-regiao">Regiao:</label>
+            <select class="form-control" name="ls-regiao" id="ls-regiao" onchange="carregarListaUf(this.value)">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group col-sm-3">
+            <label for="ls-uf">UF:</label>
+            <select class="form-control" name="ls-uf" id="ls-uf" onchange="carregarListaMunicipio(this.value)">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group col-sm-3">
+            <label for="ls-municipio">Municipio:</label>
+            <select class="form-control" name="ls-municipio" id="ls-municipio">
+                <option value=""></option>
+            </select>
+        </div>
+        <!-- <button type="submit" class="btn btn-default">Submit</button> -->
+    </div>
+
+    <div class="container">
+        <div class="form-group col-sm-3">
+            <label for="cep">CEP</label>
+            <input onblur="carregarEndereco(this.value)" type="text" class="form-control" name="cep" id="cep">
+        </div>
+        <div class="form-group col-sm-6">
+            <label for="endereco">Endereço</label>
+            <input type="text" class="form-control" name="endereco" id="endereco">
+        </div>
+        <br>
+    </div>
+
+    <script>
+
+        function carregarEndereco(cep) {
+
+            let xhttp = new XMLHttpRequest();
+            xhttp.open("GET", `https://viacep.com.br/ws/${cep}/json/`);
+
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    end = JSON.parse(this.response);
+                    document.getElementById('endereco').value = `${end.localidade}-${end['uf']}, ${end.bairro}, ${end.logradouro}`;
+                } else {
+                    document.getElementById('endereco').value = `Cep não encontrado ${cep}`;
+                }
+            }
+            xhttp.send();
+
+
+        }
+
+    </script>
+
+</body>
+
+</html>
