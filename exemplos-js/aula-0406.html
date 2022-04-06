@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Aula dia 06.04</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Painel Centro Cirurgico</h2>
+        <div class="row">
+            <input type="hidden" id="id">
+            <div class="form-group col-sm-6">
+                <label for="nome">Nome do Paciente:</label>
+                <input type="text" class="form-control" id="nome" name="nome">
+            </div>
+        </div>
+        <button class="btn" onclick="novo()">Novo</button>
+        <button class="btn btn-primary" onclick="gravar()">Gravar</button>
+        <button class="btn btn-danger" onclick="apagar()">Apagar</button>
+
+        <br>
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Nome do Paciente:</th>
+                </tr>
+            </thead>
+            <tbody id="tbCorpo">
+
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let listaPaciente = [];
+
+        if (localStorage.getItem('listaPaciente') != null) {
+            listaPaciente = JSON.parse(localStorage.getItem('listaPaciente'));
+        }
+        function gravar() {
+            let paciente = {};
+            paciente.nome = document.getElementById('nome').value;
+
+            let i = document.getElementById('id').value;
+            console.log(i == '');
+            if (i == '') {
+                listaPaciente.push(paciente);
+            } else {
+                listaPaciente[i] = paciente;
+            }
+            localStorage.setItem('listaPaciente', JSON.stringify(listaPaciente));
+            carregarTable();
+            novo();
+        }
+        function carregarTable() {
+            let tabela = '';
+            for (i in listaPaciente) {
+                tabela += `<tr onclick='editar(${i})'><td>${listaPaciente[i].nome}</td></tr>`;
+            }
+            document.getElementById('tbCorpo').innerHTML = tabela;
+        }
+
+        function editar(i) {
+            document.getElementById('id').value = i;
+            document.getElementById('nome').value = listaPaciente[i].nome;
+        }
+
+        function novo() {
+            document.getElementById('id').value = '';
+            document.getElementById('nome').value = '';
+        }
+
+        function apagar() {
+            let i = document.getElementById('id').value;
+            listaPaciente.splice(i, 1);
+            localStorage.setItem('listaPaciente', JSON.stringify(listaPaciente));
+            carregarTable();
+            novo();
+        }
+
+        carregarTable();
+    </script>
+</body>
+
+</html>
