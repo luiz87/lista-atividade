@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Ovo de Páscoa</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <style>
+        .banner {
+            background-color: burlywood;
+            text-align: center;
+            font-size: 400%;
+            font-family: "Brush Script MT";
+        }
+
+        .produto {
+            /* background-color: aqua; */
+            height: 150px;
+            margin-top: 15px;
+            margin-bottom: 30px;
+        }
+
+        .produto img {
+            float: left;
+            height: 100%;
+            width: 40%;
+        }
+
+        .produto .titulo {
+            float: left;
+            background-color: rgb(238, 202, 157);
+            text-align: center;
+            font-size: 150%;
+            font-weight: bold;
+            width: 100%;
+
+        }
+
+        .produto .descricao {
+            float: left;
+            background-color: bisque;
+            width: 60%;
+            height: 80%;
+            padding: 10px;
+        }
+
+        .produto .valor {
+            float: left;
+            text-align: center;
+            background-color: azure;
+            width: 30%;
+            height: 20%;
+            font-size: 150%;
+            font-weight: bold;
+        }
+
+        .produto .bt {
+            float: left;
+            width: 10%;
+            height: 20%;
+            text-align: center;
+            background-color: gray;
+            cursor: pointer;
+            font-size: 150%;
+            font-weight: bold;
+        }
+
+        .produto .qt {
+            float: left;
+            width: 10%;
+            height: 20%;
+            text-align: center;
+            font-size: 150%;
+            font-weight: bold;
+            background-color: azure;
+        }
+    </style>
+
+    <div class="container">
+        <div class="row">
+            <div class="banner">
+                Donna Chiquinha
+            </div>
+        </div>
+        <div class="row lista">
+            <div class="col-md-6 produto">
+                <div class="titulo">Produto XX</div>
+                <img src="foto.jpg" alt="">
+                <div class="descricao">Descrição do Produto</div>
+                <div class="valor">R$ 100,00</div>
+                <div class="bt menos">-</div>
+                <div class="qt">0</div>
+                <div class="bt mais">+</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        lista = [];
+        function buscarListaProduto() {
+            let ajax = new XMLHttpRequest();
+            ajax.open("GET", "produtos.json");
+            ajax.send();
+            ajax.onload = function () {
+                lista = JSON.parse(this.response);
+                replicar();
+            }
+        }
+
+        function replicar() {
+            let i = 0;
+            for (const p of lista) {
+                let id = i;
+                let produto = document.querySelector(".produto").cloneNode(true);
+                produto.querySelector(".titulo").innerHTML = p.nome;
+                produto.querySelector("img").innerHTML = p.img;
+                produto.querySelector(".valor").innerHTML = `R$ ${p.valor}`;
+                produto.querySelector(".descricao").innerHTML = p.descricao;
+                produto.querySelector(".qt").innerHTML = p.qt;
+
+                produto.querySelector(".menos").addEventListener("click", function () { alterarQt(id, -1) });
+                produto.querySelector(".mais").addEventListener("click", function () { alterarQt(id, 1) });
+
+                document.querySelector(".lista").append(produto);
+                i++;
+            }
+            document.querySelector(".produto").remove();
+        }
+
+        function alterarQt(id, qt) {
+            let p = lista[id];
+            p.qt += qt;
+            if(p.qt < 0 ) p.qt = 0;
+            document.getElementsByClassName("qt")[id].innerHTML = p.qt;
+        }
+
+        buscarListaProduto();
+    </script>
+</body>
+
+</html>
