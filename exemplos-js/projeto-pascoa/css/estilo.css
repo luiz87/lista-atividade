@@ -1,0 +1,83 @@
+.banner {
+    background-color: burlywood;
+    text-align: center;
+    font-size: 400%;
+    font-family: "Brush Script MT";
+}
+
+.produto {
+    /* background-color: aqua; */
+    height: 150px;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+
+.produto img {
+    float: left;
+    height: 100%;
+    width: 40%;
+}
+
+.produto .titulo {
+    float: left;
+    background-color: rgb(238, 202, 157);
+    text-align: center;
+    font-size: 150%;
+    font-weight: bold;
+    width: 100%;
+
+}
+
+.produto .descricao {
+    float: left;
+    background-color: bisque;
+    width: 60%;
+    height: 80%;
+    padding: 10px;
+}
+
+.produto .valor {
+    float: left;
+    text-align: center;
+    background-color: azure;
+    width: 30%;
+    height: 20%;
+    font-size: 150%;
+    font-weight: bold;
+}
+
+.produto .bt {
+    float: left;
+    width: 10%;
+    height: 20%;
+    text-align: center;
+    background-color: gray;
+    cursor: pointer;
+    font-size: 150%;
+    font-weight: bold;
+}
+
+.produto .qt {
+    float: left;
+    width: 10%;
+    height: 20%;
+    text-align: center;
+    font-size: 150%;
+    font-weight: bold;
+    background-color: azure;
+}
+
+.banner i {
+    float: right;
+    font-size: 100%;
+    background-color: brown;
+    margin: 6px;
+    padding: 5px;
+    border-radius: 3px;
+    color: aliceblue;
+    cursor: pointer;
+}
+
+.form-inline input{
+    float: left;
+}

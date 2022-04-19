@@ -1,0 +1,37 @@
+[
+    {
+        "nome": "Chocolate branco com Oreo",
+        "descricao": "Esse é o produto TAL...",
+        "valor": 40,
+        "qt": 0,
+        "img": "01.webp"
+    },
+    {
+        "nome": "Brownie com brigadeiro de limão",
+        "descricao": "Esse é o produto TAL...",
+        "valor": 40,
+        "qt": 0,
+        "img": "02.webp"
+    },
+    {
+        "nome": "Brigadeiro ao leite com maracujá",
+        "descricao": "Esse é o produto TAL...",
+        "valor": 40,
+        "qt": 0,
+        "img": "03.webp"
+    },
+    {
+        "nome": "Brigadeiro ao leito com beijinho",
+        "descricao": "Esse é o produto TAL...",
+        "valor": 40,
+        "qt": 0,
+        "img": "04.webp"
+    },
+    {
+        "nome": "Leito Ninho com Nutela",
+        "descricao": "Esse é o produto TAL...",
+        "valor": 45,
+        "qt": 0,
+        "img": "05.webp"
+    }
+]
