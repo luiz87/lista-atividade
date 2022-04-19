@@ -58,7 +58,7 @@ function mostrarPedido() {
 }
 
 function enviar() {
-    let fone = '5561985607460';
+    let fone = '';
     msgModal = msgModal.replaceAll("<p>", "").replaceAll("</p>", "\n");
     msgModal = msgModal.replaceAll("<b>", "*").replaceAll("</b>", "*");
     let nome = document.querySelector("#nome").value;
