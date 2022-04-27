@@ -56,7 +56,7 @@
             }
 
             let ajax = new XMLHttpRequest();
-            ajax.open(metodo, "http://localhost:8080/produto/");
+            ajax.open(metodo, "https://pascoa-chiquinha.herokuapp.com/produto/");
             ajax.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             ajax.send(JSON.stringify(produto));
             ajax.onload = function () {
@@ -68,7 +68,7 @@
         }
         function buscarProdutos() {
             let ajax = new XMLHttpRequest();
-            ajax.open("GET", "http://localhost:8080/produto/");
+            ajax.open("GET", "https://pascoa-chiquinha.herokuapp.com/produto/");
             ajax.send();
             ajax.onload = function () {
                 let retorno = JSON.parse(this.response);
@@ -88,7 +88,7 @@
 
         function editar(id) {
             let ajax = new XMLHttpRequest();
-            ajax.open("GET", `http://localhost:8080/produto/${id}`);
+            ajax.open("GET", `https://pascoa-chiquinha.herokuapp.com/produto/${id}`);
             ajax.send();
             ajax.onload = function () {
                 let p = JSON.parse(this.response);
@@ -101,7 +101,7 @@
         function apagar() {
             let id = document.querySelector("#id").value;
             let ajax = new XMLHttpRequest();
-            ajax.open("DELETE", `http://localhost:8080/produto/${id}`);
+            ajax.open("DELETE", `https://pascoa-chiquinha.herokuapp.com/produto/${id}`);
             ajax.send();
             ajax.onload = function () {
                 alert(this.response);
