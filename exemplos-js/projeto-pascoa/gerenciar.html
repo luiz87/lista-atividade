@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Gerenciar Produtos</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="formulario">
+            <input type="hidden" id="id">
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" class="form-control" id="nome">
+            </div>
+            <div class="form-group">
+                <label for="valor">Valor:</label>
+                <input type="text" class="form-control" id="valor">
+            </div>
+            <button type="submit" class="btn btn-default" onclick="gravar()">Gravar</button>
+            <button type="submit" class="btn btn-default" onclick="limparForm()">Novo</button>
+            <button type="submit" class="btn btn-default" onclick="apagar()">Apagar</button>
+        </div>
+        <table class="table strip">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script>
+        function gravar() {
+            let id = document.querySelector("#id").value;
+            let nome = document.querySelector("#nome").value;
+            let valor = document.querySelector("#valor").value;
+            let produto = {
+                nome: nome,
+                valor: valor
+            }
+
+            // verificar se o id esta preenchido
+            let metodo;
+            if (id == "") {
+                metodo = "POST";
+            } else {
+                metodo = "PUT";
+                produto.id = id;
+            }
+
+            let ajax = new XMLHttpRequest();
+            ajax.open(metodo, "http://localhost:8080/produto/");
+            ajax.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            ajax.send(JSON.stringify(produto));
+            ajax.onload = function () {
+                let retorno = this.response;
+                console.log(retorno);
+                buscarProdutos();
+                limparForm();
+            }
+        }
+        function buscarProdutos() {
+            let ajax = new XMLHttpRequest();
+            ajax.open("GET", "http://localhost:8080/produto/");
+            ajax.send();
+            ajax.onload = function () {
+                let retorno = JSON.parse(this.response);
+                let tbody = "";
+                for (const p of retorno) {
+                    tbody += `<tr onclick="editar(${p.id})" ><td>${p.nome}</td><td>${p.valor}</td></tr>`;
+                }
+                document.querySelector("tbody").innerHTML = tbody;
+            }
+        }
+
+        function limparForm() {
+            document.querySelector("#id").value = "";
+            document.querySelector("#nome").value = "";
+            document.querySelector("#valor").value = "";
+        }
+
+        function editar(id) {
+            let ajax = new XMLHttpRequest();
+            ajax.open("GET", `http://localhost:8080/produto/${id}`);
+            ajax.send();
+            ajax.onload = function () {
+                let p = JSON.parse(this.response);
+                document.querySelector("#id").value = p.id;
+                document.querySelector("#nome").value = p.nome;
+                document.querySelector("#valor").value = p.valor;
+            }
+        }
+
+        function apagar() {
+            let id = document.querySelector("#id").value;
+            let ajax = new XMLHttpRequest();
+            ajax.open("DELETE", `http://localhost:8080/produto/${id}`);
+            ajax.send();
+            ajax.onload = function () {
+                alert(this.response);
+                limparForm()
+                buscarProdutos()
+            }
+        }
+        buscarProdutos();
+    </script>
+</body>
+
+</html>
