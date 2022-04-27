@@ -13,13 +13,27 @@
     <div class="container">
         <div class="formulario">
             <input type="hidden" id="id">
-            <div class="form-group">
-                <label for="nome">Nome:</label>
-                <input type="text" class="form-control" id="nome">
+            <div class="row">
+                <div class="form-group col-md-8">
+                    <label for="nome">Nome:</label>
+                    <input type="text" class="form-control" id="nome">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="valor">Valor:</label>
+                    <input type="text" class="form-control" id="valor">
+                </div>
             </div>
-            <div class="form-group">
-                <label for="valor">Valor:</label>
-                <input type="text" class="form-control" id="valor">
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="valor">Descrição:</label>
+                    <input type="text" class="form-control" id="descricao">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="valor">URL Imagem:</label>
+                    <input type="text" class="form-control" id="imagem">
+                </div>
             </div>
             <button type="submit" class="btn btn-default" onclick="gravar()">Gravar</button>
             <button type="submit" class="btn btn-default" onclick="limparForm()">Novo</button>
@@ -39,11 +53,12 @@
     <script>
         function gravar() {
             let id = document.querySelector("#id").value;
-            let nome = document.querySelector("#nome").value;
-            let valor = document.querySelector("#valor").value;
+
             let produto = {
-                nome: nome,
-                valor: valor
+                nome: document.querySelector("#nome").value,
+                valor: document.querySelector("#valor").value,
+                descricao: document.querySelector("#descricao").value,
+                imagem: document.querySelector("#imagem").value
             }
 
             // verificar se o id esta preenchido
@@ -84,6 +99,8 @@
             document.querySelector("#id").value = "";
             document.querySelector("#nome").value = "";
             document.querySelector("#valor").value = "";
+            document.querySelector("#descricao").value = "";
+            document.querySelector("#imagem").value = "";
         }
 
         function editar(id) {
@@ -95,6 +112,8 @@
                 document.querySelector("#id").value = p.id;
                 document.querySelector("#nome").value = p.nome;
                 document.querySelector("#valor").value = p.valor;
+                document.querySelector("#descricao").value = p.descricao;
+                document.querySelector("#imagem").value = p.imagem;
             }
         }
 

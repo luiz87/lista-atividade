@@ -1,7 +1,7 @@
 lista = [];
 function buscarListaProduto() {
     let ajax = new XMLHttpRequest();
-    ajax.open("GET", "http://pascoa-chiquinha.herokuapp.com/produto/");
+    ajax.open("GET", "js/produtos.json");
     ajax.send();
     ajax.onload = function () {
         lista = JSON.parse(this.response);
@@ -12,11 +12,10 @@ function buscarListaProduto() {
 function replicar() {
     let i = 0;
     for (const p of lista) {
-        p.qt = 0;
         let id = i;
         let produto = document.querySelector(".produto").cloneNode(true);
         produto.querySelector(".titulo").innerHTML = p.nome.toUpperCase();
-        produto.querySelector("img").src = `${p.imagem}`;
+        produto.querySelector("img").src = `img/${p.img}`;
         produto.querySelector(".valor").innerHTML = `R$ ${p.valor}`;
         produto.querySelector(".descricao").innerHTML = p.descricao;
         produto.querySelector(".qt").innerHTML = p.qt;
